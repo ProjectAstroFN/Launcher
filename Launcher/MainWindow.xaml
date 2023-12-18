@@ -1,0 +1,39 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Meowscles"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="Meowscles.MainWindow"
+        mc:Ignorable="d"
+        Title="Meowscles" Height="560" Width="840"
+        ui:WindowHelper.UseModernWindowStyle="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="354*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="Background.png" Stretch="Fill" Grid.ColumnSpan="8" Margin="0,0,-384,0">
+            <Image.Effect>
+                <BlurEffect Radius="7" KernelType="Gaussian"/>
+            </Image.Effect>
+        </Image>
+        <ui:NavigationView x:Name="NavView" Loaded="NavView_Loaded" SelectionChanged="NavView_SelectionChanged" PaneDisplayMode="Left" IsBackButtonVisible="Collapsed" IsPaneToggleButtonVisible="False" IsPaneOpen="True" HorizontalAlignment="Left" Width="40" Opacity="0.5" Grid.ColumnSpan="4">
+            <ui:NavigationView.MenuItems>
+                <ui:NavigationViewItem Icon="Play" Tag="Play"/>
+                <ui:NavigationViewItem Icon="Download" Tag="Download"/>
+            </ui:NavigationView.MenuItems>
+        </ui:NavigationView>
+        <ui:Frame x:Name="ContentFrame" Margin="0,73,0,73" Height="397.04" Grid.Column="3">
+            <ui:Frame.ContentTransitions >
+                <ui:TransitionCollection>
+                    <ui:NavigationThemeTransition />
+                </ui:TransitionCollection>
+            </ui:Frame.ContentTransitions>
+        </ui:Frame>
+    </Grid>
+</Window>
+
