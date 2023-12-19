@@ -16,9 +16,9 @@
             <ColumnDefinition Width="0*"/>
             <ColumnDefinition Width="354*"/>
         </Grid.ColumnDefinitions>
-        <Image Source="Background.png" Stretch="Fill" Grid.ColumnSpan="8" Margin="0,0,-384,0">
+        <Image Source="Background.png" Stretch="UniformToFill" Grid.ColumnSpan="4" Margin="-140,00,0,-50">
             <Image.Effect>
-                <BlurEffect Radius="7" KernelType="Gaussian"/>
+                <BlurEffect Radius="0" KernelType="Gaussian"/>
             </Image.Effect>
         </Image>
         <ui:NavigationView x:Name="NavView" Loaded="NavView_Loaded" SelectionChanged="NavView_SelectionChanged" PaneDisplayMode="Left" IsBackButtonVisible="Collapsed" IsPaneToggleButtonVisible="False" IsPaneOpen="True" HorizontalAlignment="Left" Width="40" Opacity="0.5" Grid.ColumnSpan="4">

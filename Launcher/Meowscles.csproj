@@ -26,6 +26,7 @@
     <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
     <PackageReference Include="DnsClient" Version="1.7.0" />
     <PackageReference Include="ini-parser" Version="2.5.2" />
+    <PackageReference Include="libc.hwid" Version="6.0.2" />
     <PackageReference Include="ModernWpfUI" Version="0.9.6" />
     <PackageReference Include="WindowsAPICodePack.Shell.CommonFileDialogs" Version="1.1.5" />
   </ItemGroup>

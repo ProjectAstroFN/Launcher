@@ -10,7 +10,7 @@
 
     <Grid>
         <Button x:Name="btnDownload" Content="Download" Margin="0,175,0,0" VerticalAlignment="Top" Foreground="White" Click="btnDownload_Click" HorizontalAlignment="Center"/>
-        <ProgressBar x:Name="progressBar" HorizontalAlignment="Center" Height="16" Margin="0,239,0,0" VerticalAlignment="Top" Width="402" ValueChanged="progressBar_ValueChanged"/>
+        <ProgressBar x:Name="progressBar" HorizontalAlignment="Center" Height="16" Margin="0,239,0,0" VerticalAlignment="Top" Width="402" ValueChanged="progressBar_ValueChanged" Background="#666666" Opacity="0.5"/>
         <Label x:Name="lblStatus" Content="0%" HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
         <Label Content="Download 12.41" HorizontalAlignment="Center" Margin="0,78,0,0" VerticalAlignment="Top" Foreground="White" FontSize="24"/>
     </Grid>

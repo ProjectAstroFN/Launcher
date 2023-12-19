@@ -13,10 +13,10 @@
             <TextBox x:Name="PathBox" Margin="0,17,35,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TextChanged="PathBox_TextChanged" Height="40"/>
             <Button Content="..." Margin="322,21,0,0" Width="30" RenderTransformOrigin="-1.3,-0.387" Click="Button_Click" VerticalAlignment="Top"/>
         </Grid>
-        <Button Content="Save" Margin="0,318,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="89" Height="32" Click="Button_Click_1" Foreground="#000000"/>
-        <Label Content="Email:" HorizontalAlignment="Center" Margin="10,17,0,0" VerticalAlignment="Top" Foreground="#000000"/>
-        <Label Content="Password:" HorizontalAlignment="Center" Margin="10,83,0,0" VerticalAlignment="Top" Foreground="#000000"/>
-        <Label Content="Path:" HorizontalAlignment="Center" Margin="10,148,0,0" VerticalAlignment="Top" Foreground="#000000"/>
+        <Button Content="Save" Margin="0,250,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Height="32" Click="Button_Click_1" Foreground="#fff"/>
+        <Label Content="Email:" HorizontalAlignment="Center" Margin="10,17,0,0" VerticalAlignment="Top" Foreground="#fff"/>
+        <Label Content="Password:" HorizontalAlignment="Center" Margin="10,83,0,0" VerticalAlignment="Top" Foreground="#fff"/>
+        <Label Content="Path:" HorizontalAlignment="Center" Margin="10,148,0,0" VerticalAlignment="Top" Foreground="#fff"/>
 
 
 

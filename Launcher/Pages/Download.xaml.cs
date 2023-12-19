@@ -130,7 +130,7 @@ namespace Meowscles.Pages
                                     System.Console.WriteLine($"{progress}");
                                     this.Dispatcher.Invoke(() =>
                                     {
-                                        if ((string)lblStatus.Content != $"{progress:F2}%" && progress == 100)
+                                        if ((string)lblStatus.Content != $"{progress:F2}%" && progress != 100)
                                         {
                                             progressBar.Value = progress;
                                             lblStatus.Content = $"{progress:F2}%";

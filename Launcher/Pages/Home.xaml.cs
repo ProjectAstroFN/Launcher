@@ -16,6 +16,8 @@ using System.IO.Compression;
 using System.Windows.Forms;
 using MessageBox = System.Windows.Forms.MessageBox;
 using UserControl = System.Windows.Controls.UserControl;
+using libc.hwid;
+using Microsoft.Win32;
 
 public class Vars
 {
@@ -23,146 +25,6 @@ public class Vars
     public static string Password = "NONE";
     public static string Path = "NONE";
 }
-
-/*public class Launcher
-{
-
-    [DllImport("user32.dll")]
-    static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-    public static void Launch()
-    {
-        try
-        {
-            if (Vars.Path == "NONE")
-            {
-                Vars.Path = UpdateINI.ReadValue("Auth", "Path");
-            }
-            string GamePath = Vars.Path;
-            if (GamePath != "NONE") // NONE THE BEST RESPONSE!
-            {
-                //MessageBox.Show(Path69);
-                if (File.Exists(System.IO.Path.Combine(GamePath, "FortniteGame\\Binaries\\Win64\\FortniteClient-Win64-Shipping.exe")))
-                {
-                    if (Vars.Email == "NONE")
-                    {
-                        Vars.Email = UpdateINI.ReadValue("Auth", "Email");
-                    }
-                    if (Vars.Password == "NONE")
-                    {
-                        Vars.Password = UpdateINI.ReadValue("Auth", "Password");
-                    }
-                    if (Vars.Email == "NONE" || Vars.Password == "NONE")
-                    {
-                        MessageBox.Show("Please add your Meowscles info in settings!");
-                        //this.Close();
-                        //(new Form2()).Show();
-                        return;
-                    }
-                    foreach (var proc in Process.GetProcessesByName("MeowsclesEAC"))
-                    {
-                        if (proc.MainModule.FileName.StartsWith(GamePath))
-                        {
-                            proc.Kill();
-                            proc.WaitForExit();
-                        }
-                    }
-                    foreach (var proc in Process.GetProcessesByName("FortniteClient-Win64-Shipping"))
-                    {
-                        try
-                        {
-                            if (proc.MainModule.FileName.StartsWith(GamePath))
-                            {
-                                proc.Kill();
-                                proc.WaitForExit();
-                            }
-                        } catch {}
-                    }
-                    WebClient Client = new WebClient();
-                    var lookup = new LookupClient();
-                    var result = lookup.Query("meowscles.ploosh.dev", QueryType.TXT);
-                    var record = result.Answers.TxtRecords().FirstOrDefault();
-                    var ip = record?.Text.FirstOrDefault();
-                    //Client.DownloadFile("https://cdn.discordapp.com/attachments/883144741838020629/1174502844636856380/Cobalt.dll", Path.Combine(Path69, "Engine\\Binaries\\ThirdParty\\NVIDIA\\NVaftermath\\Win64", "GFSDK_Aftermath_Lib.x64.dll"));
-                    if (!File.Exists(System.IO.Path.Combine(GamePath, "MeowsclesEAC.exe")))
-                    {
-                        Client.DownloadFile($"{ip}/assets/MeowsclesEAC.zip", Path.Combine(GamePath, "MeowsclesEAC.zip"));
-                        System.IO.Compression.ZipFile.ExtractToDirectory(Path.Combine(GamePath, "MeowsclesEAC.zip"), GamePath);
-                        File.Delete(Path.Combine(GamePath, "MeowsclesEAC.zip"));
-                        if (File.Exists(System.IO.Path.Combine(GamePath, "MeowsclesEAC.exe")))
-                        {
-                            var proc = new Process()
-                            {
-                                StartInfo = new ProcessStartInfo()
-                                {
-                                    Arguments = $"install bff26fa986424f4b8fa9dd3b6e853df8",
-                                    FileName = Path.Combine(GamePath, "EasyAntiCheat", "EasyAntiCheat_EOS_Setup.exe")
-                                },
-                                EnableRaisingEvents = true
-                            };
-                            proc.Start();
-                            proc.WaitForExit();
-                        } else
-                        {
-                            MessageBox.Show("Failed to download/extract Meowscles EAC!");
-                        }
-                    }
-                    if (!File.Exists(Path.Combine(GamePath, "Engine\\Binaries\\ThirdParty\\NVIDIA\\NVaftermath\\Win64", "GFSDK_Aftermath_Lib2.x64.dll")))
-                    {
-                        File.Move(Path.Combine(GamePath, "Engine\\Binaries\\ThirdParty\\NVIDIA\\NVaftermath\\Win64", "GFSDK_Aftermath_Lib.x64.dll"), Path.Combine(GamePath, "Engine\\Binaries\\ThirdParty\\NVIDIA\\NVaftermath\\Win64", "GFSDK_Aftermath_Lib2.x64.dll"));
-                    }
-                    Client.DownloadFile($"{ip}/assets/sigs.bin", Path.Combine(GamePath, "EasyAntiCheat\\Certificates", "base.bin"));
-                    Client.DownloadFile($"{ip}/assets/GFSDK_Aftermath_Lib.x64.dll", Path.Combine(GamePath, "Engine\\Binaries\\ThirdParty\\NVIDIA\\NVaftermath\\Win64", "GFSDK_Aftermath_Lib.x64.dll"));
-
-                    IntPtr h = Process.GetCurrentProcess().MainWindowHandle;
-                    ShowWindow(h, 6);
-                    //AntiCheat.Start(Path69);
-                    Game.Start(GamePath, "-plooshfn -epicapp=Fortnite -epicenv=Prod -epiclocale=en-us -epicportal -nobe -fromfl=eac -fltoken=h1cdhchd10150221h130eB56 -skippatchcheck", Vars.Email, Vars.Password);
-                    FakeAC.Start(GamePath, "FortniteClient-Win64-Shipping_EAC.exe", $"-epicapp=Fortnite -epicenv=Prod -epiclocale=en-us -epicportal -nobe -fromfl=eac -fltoken=h1cdhchd10150221h130eB56 -skippatchcheck", "r");
-                    FakeAC.Start(GamePath, "FortniteLauncher.exe", $"-epicapp=Fortnite -epicenv=Prod -epiclocale=en-us -epicportal -nobe -fromfl=eac -fltoken=h1cdhchd10150221h130eB56 -skippatchcheck", "dsf");
-                    try
-                    {
-                        Game._FortniteProcess.WaitForExit();
-                    } catch (Exception) {}
-                    try
-                    {
-                        FakeAC._FNLauncherProcess.Close();
-                        FakeAC._FNAntiCheatProcess.Close();
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("There has been an error closing Fake AC.");
-                    }
-
-
-
-                    //Injector.Start(PSBasics._FortniteProcess.Id, Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "EonCurl.dll"));
-                }
-                else
-                {
-                    MessageBox.Show("Please add your Meowscles info in settings!");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.ToString());
-        }
-    }
-
-    public static void Kill()
-    {
-        try
-        {
-            Process.GetProcessById(Game._FortniteProcess.Id).Kill();
-            FakeAC._FNLauncherProcess.Kill();
-            FakeAC._FNAntiCheatProcess.Kill();
-        } catch (Exception)
-        {
-
-        }
-    }
-}*/
 
 public static class ZipArchiveExtensions
 {
@@ -204,7 +66,7 @@ namespace Meowscles.Pages
     /// </summary>
     public partial class Home : UserControl
 	{
-        Thread launcherThread;
+        Thread launcherThread = null;
         bool running = false;
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -261,6 +123,7 @@ namespace Meowscles.Pages
                                 this.Button.Click += Button_Click;
                                 this.Button.IsEnabled = true;
                             });
+                            running = false;
                             //this.Close();
                             //(new Form2()).Show();
                             return;
@@ -283,6 +146,7 @@ namespace Meowscles.Pages
                                     this.Button.Click += Button_Click;
                                     this.Button.IsEnabled = true;
                                 });
+                                running = false;
                                 return;
                             }
                         }
@@ -304,6 +168,7 @@ namespace Meowscles.Pages
                                     this.Button.Click += Button_Click;
                                     this.Button.IsEnabled = true;
                                 });
+                                running = false;
                                 return;
                             }
                         }
@@ -312,6 +177,12 @@ namespace Meowscles.Pages
                         var result = lookup.Query("meowscles.ploosh.dev", QueryType.TXT);
                         var record = result.Answers.TxtRecords().FirstOrDefault();
                         var ip = record?.Text.FirstOrDefault();
+
+                        RegistryKey key = Registry.CurrentUser.OpenSubKey("Software", true);
+                        key.CreateSubKey("Meowscles");
+                        key = key.OpenSubKey("Meowscles", true);
+                        key.SetValue("HWID", HwId.Generate().ToLower());
+
                         //Client.DownloadFile("https://cdn.discordapp.com/attachments/883144741838020629/1174502844636856380/Cobalt.dll", Path.Combine(Path69, "Engine\\Binaries\\ThirdParty\\NVIDIA\\NVaftermath\\Win64", "GFSDK_Aftermath_Lib.x64.dll"));
                         if (!File.Exists(System.IO.Path.Combine(GamePath, "MeowsclesEAC.exe")))
                         {
@@ -341,6 +212,7 @@ namespace Meowscles.Pages
                                         this.Button.Click += Button_Click;
                                         this.Button.IsEnabled = true;
                                     });
+                                    running = false;
                                     return;
                                 } else if (proc.ExitCode != 0)
                                 {
@@ -353,6 +225,7 @@ namespace Meowscles.Pages
                                         this.Button.Click += Button_Click;
                                         this.Button.IsEnabled = true;
                                     });
+                                    running = false;
                                     return;
                                 }
                             }
@@ -365,6 +238,7 @@ namespace Meowscles.Pages
                                     this.Button.Click += Button_Click;
                                     this.Button.IsEnabled = true;
                                 });
+                                running = false;
                                 return;
                             }
                         } else
@@ -449,6 +323,7 @@ namespace Meowscles.Pages
                             this.Button.Click += Button_Click;
                             this.Button.IsEnabled = true;
                         });
+                        running = false;
                     }
                 }
                 else
@@ -460,17 +335,19 @@ namespace Meowscles.Pages
                         this.Button.Click += Button_Click;
                         this.Button.IsEnabled = true;
                     });
+                    running = false;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                if (!(ex is ThreadAbortException)) MessageBox.Show(ex.ToString());
                 this.Dispatcher.Invoke(() =>
                 {
                     this.Button.Content = "Start Meowscles";
                     this.Button.Click += Button_Click;
                     this.Button.IsEnabled = true;
                 });
+                running = false;
             }
         }
 

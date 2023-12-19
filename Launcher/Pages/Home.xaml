@@ -6,9 +6,7 @@
              xmlns:local="clr-namespace:Meowscles.Pages"
              mc:Ignorable="d" Width="386" Height="364">
     <Grid>
-
-        <Image Height="142" Margin="0,40,0,0" VerticalAlignment="Top" Width="146" Source="/Pages/82b12ac249fbb223299e6a234b87b948.png" RenderTransformOrigin="1.268,0.599" HorizontalAlignment="Center"/>
-        <Button x:Name="Button" Content="Start Meowscles" Margin="0,0,0,75" VerticalAlignment="Bottom" Width="120" Height="45" HorizontalAlignment="Center" Click="Button_Click"/>
+        <Button x:Name="Button" Content="Start Meowscles" Margin="0,0,0,172" VerticalAlignment="Bottom" Width="120" Height="45" HorizontalAlignment="Center" Click="Button_Click" Foreground="#fff"/>
 
     </Grid>
 </UserControl>
